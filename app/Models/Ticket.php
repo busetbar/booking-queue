@@ -22,4 +22,23 @@ class Ticket extends Model
         'status',
         'date'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($ticket) 
+        {
+            // Menghasilkan nomor antrian secara otomatis
+            $lastTicket = static::latest()->first();
+            if ($lastTicket) {
+                // Mengambil nomor antrian terakhir dan menambahkan 1
+                $lastQueueNumber = intval($lastTicket->no_queue);
+                $ticket->no_queue = $lastQueueNumber + 1;
+            } else {
+                // Jika tidak ada nomor antrian sebelumnya, nomor antrian pertama diatur menjadi 1
+                $ticket->no_queue = 0000;
+            }
+        });
+    }
 }

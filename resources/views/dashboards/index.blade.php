@@ -43,8 +43,7 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">Username</label>
-                                            <input type="text" id="first-name-column" class="form-control"
-                                                placeholder="username" name="contact_name" required>
+                                            <input type="text" id="first-name-column" class="form-control" name="contact_name" value="{{session('username')}}" readonly>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">

@@ -27,11 +27,13 @@ class TicketController extends Controller
         }
     }
 
-    public function viewAddTicket()
+    public function viewDetailTicket(Request $request)
     {
-        $oUser = Session::get('username');
-        $oGetUser = Users::where('username', $oUser);
-        return view('ticket.add', ['user' => $oGetUser]);
+        $oUser = $request->session()->get('username');
+        $oGetUser = Ticket::where('contact_name', $oUser)->first();
+        //echo '<pre>';
+        //var_dump($oGetUser);
+        return view('tickets.detail', ['user' => $oGetUser]);
     }
 
     public function doPostTicket(Request $request)
@@ -46,7 +48,7 @@ class TicketController extends Controller
                 'status' => 'required'
             ]);
 
-            $totalTickets = Ticket::count();
+            // $totalTickets = Ticket::count();
 
             $oTicket = new Ticket();
             $oTicket->contact_name = $sValid['contact_name'];
@@ -56,17 +58,17 @@ class TicketController extends Controller
             $oTicket->status = $sValid['status'];
             $oTicket->created_at = now();
             $oTicket->updated_at = now();
-            $noQueue = 'T - ' . ($totalTickets + 1);
-            $oTicket->no_queue = $noQueue;
+            // $noQueue = 'T - ' . ($totalTickets + 1);
+            // $oTicket->no_queue = $noQueue;
             $oTicket->save();
             
-            return redirect('/')->with('success', 'Users berhasil ditambahkan');
+            return redirect('/detail')->with('success', 'Users berhasil ditambahkan');
         }
         catch (Exception $e)
         {
             $oError = $e->getMessage();
             Log::error($oError);
-            return redirect('/')->with('error', "$oError");
+            return redirect('/dash')->with('error', "$oError");
         }
     }
 }
