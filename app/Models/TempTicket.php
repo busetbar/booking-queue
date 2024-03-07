@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Ticket extends Model
+class TempTicket extends Model
 {
     use HasFactory;
 
-    protected $table = 'tbl_tickets';
-    protected $primaryKey = 'ticket_id';
+    protected $table = 'tbl_temp_tickets';
+    protected $primaryKey = 'temp_ticket_id';
 
     protected $fillable = [
         'contact_name',

@@ -2,39 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Ticket;
-use App\Models\Users;
-use Exception;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Session;
 
-class TicketController extends Controller
+class TempTicketController extends Controller
 {
-    //
-    public function GetOpenTicket(Request $request)
+    public function showAllTicket()
     {
         try
         {
-            $oGetUser = $request->session()->get('username');
-            $oGetTicket = Ticket::where('contact_name', $oGetUser)->where('status', 'open')->get();
-            return view('tickets.open', ['ticket' => $oGetTicket]);
-        }
-        catch (Exception $e)
-        {
-            $oError = $e->getMessage();
-            Log::error($oError);
-        }
-    }
-
-    public function GetCloseTicket(Request $request)
-    {
-        try
-        {
-            $oGetUser = $request->session()->get('username');
-            $oGetTicket = Ticket::where('contact_name', $oGetUser)->where('status', 'closed')->get();
-            return view('tickets.closed', ['ticket' => $oGetTicket]);
+            $oTicket = Ticket::all();
+            return view('ticket.index', ['ticket' => $oTicket]);
         }
         catch (Exception $e)
         {
@@ -47,11 +24,9 @@ class TicketController extends Controller
     {
         $oUser = $request->session()->get('username');
         $oGetUser = Ticket::where('contact_name', $oUser)->first();
-        $oTotal = Ticket::where('status', 'open')->get();
-        $oCount = count($oTotal);
         //echo '<pre>';
         //var_dump($oGetUser);
-        return view('tickets.detail', ['user' => $oGetUser, 'total' => $oCount]);
+        return view('tickets.detail', ['user' => $oGetUser]);
     }
 
     public function doPostTicket(Request $request)
@@ -66,7 +41,7 @@ class TicketController extends Controller
                 'status' => 'required'
             ]);
 
-            $totalTickets = Ticket::count();
+            // $totalTickets = Ticket::count();
 
             $oTicket = new Ticket();
             $oTicket->contact_name = $sValid['contact_name'];
@@ -76,8 +51,8 @@ class TicketController extends Controller
             $oTicket->status = $sValid['status'];
             $oTicket->created_at = now();
             $oTicket->updated_at = now();
-            $noQueue = ($totalTickets + 1);
-            $oTicket->no_queue = $noQueue;
+            // $noQueue = 'T - ' . ($totalTickets + 1);
+            // $oTicket->no_queue = $noQueue;
             $oTicket->save();
             
             return redirect('/detail')->with('success', 'Users berhasil ditambahkan');

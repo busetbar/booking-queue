@@ -21,13 +21,18 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-// Dashboard
-Route::get('/dash', [DashboardController::class, 'index'])->name('dash');
 
-// Login
+Route::middleware(['check.username'])->group(function () {
+    // Dashboard
+    Route::get('/dash', [DashboardController::class, 'index'])->name('dash');
+    
+    //Tickets
+    Route::post('/post', [TicketController::class, 'doPostTicket'])->name('PostTicket');
+    Route::get('/detail', [TicketController::class, 'viewDetailTicket'])->name('detail');
+    Route::get('/open-ticket', [TicketController::class, 'GetOpenTicket'])->name('open');
+    Route::get('/close-ticket', [TicketController::class, 'GetCloseTicket'])->name('closed');
+});
+
+// Rute login
 Route::get('/', [CustomerController::class, 'viewInput'])->name('login');
 Route::post('/', [CustomerController::class, 'doInput'])->name('dologin');
-
-//Tickets
-Route::post('/post', [TicketController::class, 'doPostTicket'])->name('PostTicket');
-Route::get('/detail', [TicketController::class, 'viewDetailTicket'])->name('detail');

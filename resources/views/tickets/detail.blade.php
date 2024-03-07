@@ -47,7 +47,7 @@
                                         </tr>
                                         <tr>
                                             <th class="text-bold-500">No Antrian : </th>
-                                            <td>{{$user->no_queue}}</td>
+                                            <td>{{$user->no_queue}} dari {{$total}} </td>
                                         </tr>
                                         <tr>
                                             <th class="text-bold-500">Status Antrian : </th>
