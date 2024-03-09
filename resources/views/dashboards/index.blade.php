@@ -67,7 +67,7 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="last-name-column">Email</label>
-                                                        <input type="email" id="last-name-column" class="form-control"
+                                                        <input type="text" id="last-name-column" class="form-control"
                                                             placeholder="Email" name="email">
                                                     </div>
                                                 </div>
@@ -81,7 +81,7 @@
                                                 <div class="col-md-6 col-12">
                                                     <div class="form-group">
                                                         <label for="city-column">Status</label>
-                                                        <input type="text" id="city-column" class="form-control" value="open" readonly
+                                                        <input type="text" id="city-column" class="form-control" value="Open" readonly
                                                             name="status">
                                                     </div>
                                                 </div>  
@@ -115,7 +115,7 @@
                                             <tr>
                                                 <th>Reference Ticket</th>
                                                 <th>No Antrian</th>
-                                                <th>Date</th>
+                                                <th>Dibuat Tgl</th>
                                                 <th>Status</th>
                                                 
                                             </tr>
@@ -130,7 +130,7 @@
                                             <tr>
                                                 <td><a href="{{route('ticket_detail', ['ref' => $t->ref_num]) }}">{{$t->ref_num}}</td>
                                                 <td>{{$t->no_queue}}</td>
-                                                <td>{{$t->date}}</td>
+                                                <td>{{$t->created_at->format('d F Y H:i:s')}}</td>
                                                 <td>
                                                     <span class="badge bg-success">{{$t->status}}</span>
                                                 </td>
@@ -161,7 +161,7 @@
                                             <tr>
                                                 <th>Reference Ticket</th>
                                                 <th>No Antrian</th>
-                                                <th>Date</th>
+                                                <th>Dibuat tgl</th>
                                                 <th>Status</th>
                                                 
                                             </tr>
@@ -176,9 +176,9 @@
                                             <tr>
                                                 <td>{{ $c->ref_num }}</td>
                                                 <td>{{ $c->no_queue }}</td>
-                                                <td>{{ $c->date }}</td>
+                                                <td>{{$t->created_at->format('d F Y H:i:s')}}</td>
                                                 <td>
-                                                    <span class="badge bg-success">{{ $c->status }}</span>
+                                                    <span class="badge bg-danger">{{ $c->status }}</span>
                                                 </td>
                                             </tr>
                                             @endforeach

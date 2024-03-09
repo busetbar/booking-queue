@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminDashboard;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TempTicketController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,10 +31,10 @@ Route::middleware(['check.username'])->group(function () {
     Route::get('/info/{ref}', [DashboardController::class, 'getTicketDetail'])->name('ticket_detail');
     
     //Tickets
-    Route::post('/post', [TicketController::class, 'doPostTicket'])->name('PostTicket');
-    Route::get('/detail', [TicketController::class, 'viewDetailTicket'])->name('detail');
-    Route::get('/open-ticket', [TicketController::class, 'GetOpenTicket'])->name('open');
-    Route::get('/close-ticket', [TicketController::class, 'GetCloseTicket'])->name('closed');
+    Route::post('/post', [TempTicketController::class, 'doPostTicket'])->name('PostTicket');
+    Route::get('/detail', [TempTicketController::class, 'viewDetailTicket'])->name('detail');
+    Route::get('/open-ticket', [TempTicketController::class, 'GetOpenTicket'])->name('open');
+    Route::get('/close-ticket', [TempTicketController::class, 'GetCloseTicket'])->name('closed');
 
     // Customer Logout
     Route::get('/logout', [CustomerController::class, 'doLogout'])->name('logout');
@@ -40,3 +43,26 @@ Route::middleware(['check.username'])->group(function () {
 // Customer Login
 Route::get('/', [CustomerController::class, 'viewInput'])->name('login');
 Route::post('/', [CustomerController::class, 'doInput'])->name('dologin');
+
+Route::middleware(['validate.login'])->group(function () {
+    // Dashboard Customer
+    //Route::get('/admin', [DashboardController::class, 'index'])->name('dash');
+    Route::get('/info/{ref}', [DashboardController::class, 'getTicketDetail'])->name('ticket_detail');
+    
+    //Tickets
+    Route::post('/post', [TempTicketController::class, 'doPostTicket'])->name('PostTicket');
+    Route::get('/detail', [TempTicketController::class, 'viewDetailTicket'])->name('detail');
+    Route::get('/open-ticket', [TempTicketController::class, 'GetOpenTicket'])->name('open');
+    Route::get('/close-ticket', [TempTicketController::class, 'GetCloseTicket'])->name('closed');
+
+    // Customer Logout
+    Route::get('/logout', [CustomerController::class, 'doLogout'])->name('logout');
+});
+
+
+Route::get('/op', [UserController::class, 'viewInput'])->name('loginAdmin');
+Route::post('/op', [UserController::class, 'doInput'])->name('dologinAdmin');
+Route::get('/register', [UserController::class, 'viewRegister'])->name('register');
+Route::post('/register', [UserController::class, 'registerUser'])->name('registerUser');
+
+Route::get('/admin', [AdminDashboard::class, 'index'])->name('adminDash');

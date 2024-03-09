@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('tbl_users', function (Blueprint $table) {
             $table->bigIncrements('user_id');
             $table->string('username', 32);
-            $table->string('password', 32);
+            $table->string('password', 100);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
