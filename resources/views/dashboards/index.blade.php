@@ -56,11 +56,18 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="city-column">No Telphone</label>
-                                            <input type="text" id="city-column" class="form-control" placeholder="Password"
+                                            <input type="text" id="city-column" class="form-control" placeholder="No Telephone"
                                                 name="no_tlp">
                                         </div>
                                     </div>  
-                                    <div class="col-md-6 mb-12">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="city-column">Status</label>
+                                            <input type="text" id="city-column" class="form-control" value="open" readonly
+                                                name="status">
+                                        </div>
+                                    </div>  
+                                    {{-- <div class="col-md-6 mb-12">
                                         <label>Status</label>
                                         <fieldset class="form-group">
                                             <select class="form-select" id="basicSelect" name="status">
@@ -68,7 +75,7 @@
                                                 <option value="closed" disabled>Closed</option>
                                             </select>
                                         </fieldset>
-                                    </div>
+                                    </div> --}}
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                         <button class="btn btn-danger me-1 mb-1" onclick="history.back()">Cancel</button>
@@ -76,6 +83,44 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row match-height">
+            <div class="col-12">
+                <div class="page-title">
+                    <div class="row">
+                        <div class="col-12 col-md-6 order-md-1 order-last">
+                            <h3>Opened Ticket</h3>
+                            <p class="text-subtitle text-muted">Multiple form layouts, you can use.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>Reference Ticket</th>
+                                    <th>No Antrian</th>
+                                    <th>Username</th>
+                                    <th>Status</th>
+                                    
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Graiden</td>
+                                    <td>vehicula.aliquet@semconsequat.co.uk</td>
+                                    <td>076 4820 8838</td>
+                                    <td>
+                                        <span class="badge bg-success">Active</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
