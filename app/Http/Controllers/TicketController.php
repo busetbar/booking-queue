@@ -12,14 +12,15 @@ use Illuminate\Support\Facades\Session;
 
 class TicketController extends Controller
 {
-    //
+    //Customer
+    // Admin
     public function GetOpenTicket(Request $request)
     {
         try
         {
             $oGetUser = $request->session()->get('username');
             $oGetTicket = Ticket::where('contact_name', $oGetUser)->where('status', 'open')->get();
-            return view('tickets.open', ['ticket' => $oGetTicket]);
+            return view('dashboards.index', ['ticket' => $oGetTicket]);
         }
         catch (Exception $e)
         {
@@ -43,14 +44,13 @@ class TicketController extends Controller
         }
     }
 
-    public function viewDetailTicket(Request $request)
+    public function viewDetailTicket(Request $request, $ref)
     {
         $oUser = $request->session()->get('username');
-        $oGetUser = Ticket::where('contact_name', $oUser)->first();
+        $oGetUser = Ticket::where('ref_num', $ref)->where('contact_name', $oUser)->first();
         $oTotal = Ticket::where('status', 'open')->get();
         $oCount = count($oTotal);
-        //echo '<pre>';
-        //var_dump($oGetUser);
+
         return view('tickets.detail', ['user' => $oGetUser, 'total' => $oCount]);
     }
 
@@ -80,7 +80,7 @@ class TicketController extends Controller
             $oTicket->no_queue = $noQueue;
             $oTicket->save();
             
-            return redirect('/detail')->with('success', 'Users berhasil ditambahkan');
+            return redirect('/dash')->with('success', 'Users berhasil ditambahkan');
         }
         catch (Exception $e)
         {

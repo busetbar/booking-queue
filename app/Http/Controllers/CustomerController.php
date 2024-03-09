@@ -33,4 +33,23 @@ class CustomerController extends Controller
             return redirect('/')->with('error', "$oError");
         }
     }
+
+    public function doLogout(Request $request)
+    {
+        try
+        {
+            $oGetSeesion = $request->session()->get('username');
+            if (!$oGetSeesion)
+            {
+                return redirect('/')->with('success', 'Berhasil Logout !');
+            }
+            $request->session()->flush();
+            return redirect('/')->with('success', 'Berhasil Logout');
+        }
+        catch(Exception $e)
+        {
+            $oError = $e->getMessage();
+            Log::error($oError);
+        }
+    }
 }

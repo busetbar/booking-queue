@@ -18,7 +18,7 @@
     <script src="assets/static/js/initTheme.js"></script>
     <nav class="navbar navbar-light">
         <div class="container d-block">
-            <a href="index.html"><i class="bi bi-chevron-left"></i></a>
+            <a href="{{route('dash')}}"><i class="bi bi-chevron-left"></i></a>
             <a class="navbar-brand ms-4" href="index.html">
                 <img src="./assets/compiled/svg/logo.svg">
             </a>
@@ -41,21 +41,21 @@
                                     
                                         <tr>
                                             <th class="text-bold-500">Reference Ticket : </th>
-                                            <td>{{$user->ref_num}}</td>
+                                            <td>{{$detail->ref_num}}</td>
                                             <td></td>
                                             <td></td>
                                         </tr>
                                         <tr>
                                             <th class="text-bold-500">No Antrian : </th>
-                                            <td>{{$user->no_queue}} dari {{$total}} </td>
+                                            <td>{{$detail->no_queue}} dari {{$total}} </td>
                                         </tr>
                                         <tr>
                                             <th class="text-bold-500">Status Antrian : </th>
-                                            <td>{{$user->status}}</td>
+                                            <td>{{$detail->status}}</td>
                                         </tr>
                                         <tr>
                                             <th class="text-bold-500">Tanggal : </th>
-                                            <td>{{$user->created_at}}</td>
+                                            <td>{{$detail->created_at}}</td>
                                         </tr>
                                         <tr>
                                             <th class="text-bold-500">Estimasi Sudah di tempat : </th>

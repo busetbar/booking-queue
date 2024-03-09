@@ -23,16 +23,20 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::middleware(['check.username'])->group(function () {
-    // Dashboard
+    // Dashboard Customer
     Route::get('/dash', [DashboardController::class, 'index'])->name('dash');
+    Route::get('/info/{ref}', [DashboardController::class, 'getTicketDetail'])->name('ticket_detail');
     
     //Tickets
     Route::post('/post', [TicketController::class, 'doPostTicket'])->name('PostTicket');
     Route::get('/detail', [TicketController::class, 'viewDetailTicket'])->name('detail');
     Route::get('/open-ticket', [TicketController::class, 'GetOpenTicket'])->name('open');
     Route::get('/close-ticket', [TicketController::class, 'GetCloseTicket'])->name('closed');
+
+    // Customer Logout
+    Route::get('/logout', [CustomerController::class, 'doLogout'])->name('logout');
 });
 
-// Rute login
+// Customer Login
 Route::get('/', [CustomerController::class, 'viewInput'])->name('login');
 Route::post('/', [CustomerController::class, 'doInput'])->name('dologin');
